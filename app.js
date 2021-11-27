@@ -1,6 +1,15 @@
 $(function () {
     $("#form-ajax").on('submit',function(e) {
         e.preventDefault();
+        $('#zip_result').html("<p></p>");
+        $('#prefcode').html("");
+        $('#address1').html("");
+        $('#address2').html("");
+        $('#address3').html("");
+        $('#kana1').html("");
+        $('#kana2').html("");
+        $('#kana3').html("");
+
 
         // 入力された値を取得
         var input_postcode = $('#zipcode').val();
@@ -23,9 +32,14 @@ $(function () {
             if (res.status != 200) {
                 // 通信には成功。APIの結果がエラー
                 // エラー内容を表示
-                $('#zip_result').html("<p>入力値が適切でない、もしくは入力値の郵便番号が存在しません。</p>");
+                $('#zip_result').html("<p>入力値が適切でありません。</p>");
 
             } else {
+
+                if (res.results == null) {
+                    $('#zip_result').html("<p>入力値に該当する郵便番号が存在しません。</p>");
+                }
+
                 var result = res.results[0]
                 console.log(result);
                 //住所を表示
