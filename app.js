@@ -3,21 +3,22 @@ $(function () {
         // 入力された値を取得
         $input_postcode = $('#zipcode').val();
         // urlを設定
-        var url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + $input_postcode;
+        var url = "https://zipcloud.ibsnet.co.jp/api/search" 
         // 送るデータを成形する
         var param = { zipcode: $input_postcode };
-        $('#prefcode').html("wfeqf");
+        $('#prefcode').html("001");
 
         // サーバーと通信(Ajax)
         
         $.ajax({
             type: "GET", 
             cache: false,
-            // data: param,
-            data: { zipcode: $input_postcode },
-            url: "https://zipcloud.ibsnet.co.jp/api/search",
+            data: param,
+            // data: { zipcode: $input_postcode },
+            url: url,
             dataType: "jsonp"
         })
+        
         .done(function (res) {
             if (res.status != 200) {
                 // 通信には成功。APIの結果がエラー
@@ -36,10 +37,14 @@ $(function () {
             }
 
         })
+        
         .fail(function (error) {
             console.log(error);
             $('#zip_result').html("<p>通信エラーです。時間をおいてお試しください</p>");
         });
+        $('#address1').html("002");
+        $('#address2').html(res);
+        console.log(res);
     });
 });
 
