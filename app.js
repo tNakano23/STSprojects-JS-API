@@ -1,5 +1,7 @@
 $(function () {
-    $("#serch_btn").click(function () {
+    $("#form-ajax").on('submit',function(e) {
+        e.preventDefault();
+
         // 入力された値を取得
         var input_postcode = $('#zipcode').val();
         // urlを設定
